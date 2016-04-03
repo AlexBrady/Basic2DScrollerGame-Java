@@ -6,7 +6,7 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "Wasstory bud"
+    private static final String TAG = "my message";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,5 +66,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         Log.i(TAG, "onRestoreInstanceState");
+    }
+
+    private void TestGit()
+    {
+        int i = 2;
+        int ii = 3;
+        int iii = i + ii;
     }
 }
