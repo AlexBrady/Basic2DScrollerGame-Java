@@ -5,6 +5,7 @@ import android.view.SurfaceHolder;
 
 public class MainThread extends Thread
 {
+    //declare variables
     private int FPS = 30;
     private double averageFPS;
     private SurfaceHolder surfaceHolder;
@@ -34,27 +35,37 @@ public class MainThread extends Thread
             canvas = null;
 
             //try locking the canvas for pixel editing
-            try {
+            try
+            {
                 canvas = this.surfaceHolder.lockCanvas();
-                synchronized (surfaceHolder) {
+
+                synchronized (surfaceHolder)
+                {
                     this.gamePanel.update();
                     this.gamePanel.draw(canvas);
                 }
-            } catch (Exception e) {
             }
-            finally{
+            catch (Exception e)
+            {
+            }
+            finally
+            {
                 if(canvas!=null)
                 {
-                    try {
+                    try
+                    {
                         surfaceHolder.unlockCanvasAndPost(canvas);
                     }
-                    catch(Exception e){e.printStackTrace();}
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
                 }
             }
 
 
 
-
+            //reset/load frames
             timeMillis = (System.nanoTime() - startTime) / 1000000;
             waitTime = targetTime-timeMillis;
 
