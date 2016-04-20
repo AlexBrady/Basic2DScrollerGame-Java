@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class Missile extends GameObject
 {
+    //declare variables
     private int score;
     private int speed;
     private Random rand = new Random();

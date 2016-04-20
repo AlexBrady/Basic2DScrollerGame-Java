@@ -45,6 +45,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private boolean started;
     private int best;
 
+
     //set lower for more difficulty
     private int progressDenom = 5;
 

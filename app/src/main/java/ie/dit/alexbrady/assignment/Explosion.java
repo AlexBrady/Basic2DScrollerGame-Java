@@ -2,6 +2,7 @@ package ie.dit.alexbrady.assignment;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.media.MediaPlayer;
 
 public class Explosion
 {
@@ -13,6 +14,7 @@ public class Explosion
     private int row;
     private Animation animation = new Animation();
     private Bitmap spritesheet;
+
 
     public Explosion(Bitmap res, int x, int y, int w, int h, int numFrames)
     {
