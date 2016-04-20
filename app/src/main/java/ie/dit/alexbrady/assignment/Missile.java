@@ -22,10 +22,10 @@ public class Missile extends GameObject
         height = h;
         score = s;
 
-        speed = 14 + (int) (rand.nextDouble()*score/30);
+        speed = 20 + (int) (rand.nextDouble()*score/30);
 
         //cap missile speed
-        if(speed>60)speed = 60;
+        if(speed>80)speed = 80;
 
         Bitmap[] image = new Bitmap[numFrames];
 
