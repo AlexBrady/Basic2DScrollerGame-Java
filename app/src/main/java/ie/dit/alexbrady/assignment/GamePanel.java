@@ -46,7 +46,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
     private int best;
 
     //set lower for more difficulty
-    private int progressDenom = 10;
+    private int progressDenom = 5;
 
 
 
@@ -131,6 +131,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
             player.setUp(false);
             return true;
         }//end if
+
+
+
 
         return super.onTouchEvent(event);
     }//end onTouchEvent
@@ -222,21 +225,33 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
 
             //add bullets on timer
             long elapsed = (System.nanoTime() - pewStartTime)/1000000;
-            if(elapsed > 500)
+            if(elapsed > 600)
             {
                 pew.add(new Laser(BitmapFactory.decodeResource(getResources(), R.drawable.
                         laser),player.getX(), player.getY(), 40, 40, player.getScore()));
                 pewStartTime = System.nanoTime();
             }//end if
 
-            for(int i = 0; i<pew.size();i++)
-            {
+            for(int i = 0; i<pew.size();i++) {
                 pew.get(i).update();
-                if(pew.get(i).getX() <-10)
-                {
-                    pew.remove(i);
-                }//end if
-            }//end for
+
+                for (int j = 0; j < missiles.size(); j++) {
+                    pew.get(i).update();
+
+                    if (collision(pew.get(i), missiles.get(j))) {
+                        missiles.remove(j);
+                        explosion = new Explosion(BitmapFactory.decodeResource(getResources(), R.drawable.explosion), pew.get(i).getX(),
+                                pew.get(i).getY()-30, 100, 100, 25);
+                        player.upScore();
+                        break;
+                    }//end if
+                    explosion.update();
+                    if (pew.get(i).getX() < -10) {
+                        pew.remove(i);
+                    }//end if
+                    //end for
+                }
+            }
         }//end if(getPlaying)
         else
         {
@@ -398,6 +413,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback
         if(!player.getPlaying()&&newGameCreated&&reset)
         {
             Paint paint1 = new Paint();
+            paint1.setColor(Color.GREEN);
             paint1.setTextSize(40);
             paint1.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
             canvas.drawText("PRESS TO START", WIDTH/2-50, HEIGHT/2, paint1);
